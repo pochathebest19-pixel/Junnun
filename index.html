@@ -59,7 +59,7 @@
 
   /* ---- card ---- */
   .card{
-    position:relative;z-index:2;width:100%;max-width:640px;
+    position:relative;z-index:2;width:100%;max-width:700px;
     padding:clamp(2.25rem,5.5vw,3.75rem) clamp(1.5rem,5vw,3.25rem);
     border-radius:32px;background:var(--glass);border:1px solid var(--edge);
     backdrop-filter:blur(28px) saturate(140%);-webkit-backdrop-filter:blur(28px) saturate(140%);
@@ -96,16 +96,37 @@
   }
   .tagline b{color:var(--fg);font-weight:600}
 
-  .tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:2rem}
-  .tag{
-    display:inline-flex;align-items:center;gap:.45rem;
-    font-size:.82rem;font-weight:600;letter-spacing:.01em;
-    border:1px solid var(--edge);border-radius:999px;padding:.46rem 1rem;
-    background:rgba(127,127,127,.07);transition:transform .25s,border-color .25s;
+  .tabs{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:1.6rem}
+  .tab{
+    display:inline-flex;align-items:center;gap:.45rem;cursor:pointer;
+    font:inherit;font-size:.82rem;font-weight:600;letter-spacing:.01em;color:var(--fg);
+    border:1px solid var(--edge);border-radius:999px;padding:.5rem 1.15rem;
+    background:rgba(127,127,127,.07);
+    transition:transform .25s,border-color .25s,background .25s;
   }
-  .tag:hover{transform:translateY(-2px);border-color:var(--lime)}
-  .tag svg{width:15px;height:15px;fill:none;stroke:var(--lime);stroke-width:1.8;
+  .tab:hover{transform:translateY(-2px);border-color:var(--lime)}
+  .tab[aria-selected="true"]{
+    border-color:var(--lime);
+    background:color-mix(in srgb,var(--lime) 17%,transparent);
+  }
+  .tab svg{width:15px;height:15px;fill:none;stroke:var(--lime);stroke-width:1.8;
     stroke-linecap:round;stroke-linejoin:round}
+
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .45s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes fade{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+  .panel h2{
+    font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:.95rem;opacity:.85;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:1.9rem}
+  .chip{
+    font-size:.78rem;font-weight:500;color:var(--muted);
+    border:1px solid var(--edge);border-radius:9px;padding:.36rem .72rem;
+    background:rgba(127,127,127,.05);
+    transition:color .22s,border-color .22s,background .22s;
+  }
+  .chip:hover{color:var(--fg);border-color:var(--lime);background:rgba(127,127,127,.1)}
 
   .foot{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
     color:var(--muted);opacity:.8}
@@ -244,14 +265,69 @@
     Sports, music and arts training at a price families can actually afford.
   </p>
 
-  <div class="tags">
-    <span class="tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3l4 3-1.5 5h-5L8 6z"/></svg>Sports</span>
-    <span class="tag"><svg viewBox="0 0 24 24"><path d="M9 17V5l11-2v12"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/></svg>Music</span>
-    <span class="tag"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18c1.8 0 1.8-1.8 1.2-3s.6-2.4 2.4-2.4H18a3 3 0 003-3c0-5.4-4.2-9.6-9-9.6z"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="14" cy="7" r="1"/><circle cx="7" cy="13.5" r="1"/></svg>Arts</span>
+  <div class="tabs" role="tablist" aria-label="What we coach">
+    <button class="tab" role="tab" id="t-sports" aria-controls="p-sports" aria-selected="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3l4 3-1.5 5h-5L8 6z"/></svg>Sports</button>
+    <button class="tab" role="tab" id="t-music" aria-controls="p-music" aria-selected="false">
+      <svg viewBox="0 0 24 24"><path d="M9 17V5l11-2v12"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/></svg>Music</button>
+    <button class="tab" role="tab" id="t-arts" aria-controls="p-arts" aria-selected="false">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18c1.8 0 1.8-1.8 1.2-3s.6-2.4 2.4-2.4H18a3 3 0 003-3c0-5.4-4.2-9.6-9-9.6z"/><circle cx="8.5" cy="8.5" r="1"/><circle cx="14" cy="7" r="1"/><circle cx="7" cy="13.5" r="1"/></svg>Arts</button>
+  </div>
+
+  <div class="panel on" id="p-sports" role="tabpanel" aria-labelledby="t-sports">
+    <h2>Games we'll coach</h2>
+    <div class="chips">
+      <span class="chip">Cricket</span><span class="chip">Football</span><span class="chip">Badminton</span>
+      <span class="chip">Basketball</span><span class="chip">Volleyball</span><span class="chip">Kabaddi</span>
+      <span class="chip">Kho-Kho</span><span class="chip">Athletics</span><span class="chip">Table Tennis</span>
+      <span class="chip">Hockey</span><span class="chip">Swimming</span><span class="chip">Chess</span>
+      <span class="chip">Carrom</span><span class="chip">Boxing</span><span class="chip">Wrestling</span>
+    </div>
+  </div>
+
+  <div class="panel" id="p-music" role="tabpanel" aria-labelledby="t-music">
+    <h2>Instruments &amp; voice</h2>
+    <div class="chips">
+      <span class="chip">Tabla</span><span class="chip">Guitar</span><span class="chip">Keyboard</span>
+      <span class="chip">Harmonium</span><span class="chip">Violin</span><span class="chip">Flute</span>
+      <span class="chip">Sitar</span><span class="chip">Dholak</span><span class="chip">Drums</span>
+      <span class="chip">Hindustani Vocal</span><span class="chip">Carnatic Vocal</span>
+      <span class="chip">Western Vocal</span><span class="chip">Folk Music</span>
+    </div>
+  </div>
+
+  <div class="panel" id="p-arts" role="tabpanel" aria-labelledby="t-arts">
+    <h2>Arts &amp; movement</h2>
+    <div class="chips">
+      <span class="chip">Painting</span><span class="chip">Sketching</span><span class="chip">Craft</span>
+      <span class="chip">Clay Modelling</span><span class="chip">Calligraphy</span>
+      <span class="chip">Bharatanatyam</span><span class="chip">Kathak</span><span class="chip">Folk Dance</span>
+      <span class="chip">Western Dance</span><span class="chip">Theatre</span><span class="chip">Yoga</span>
+      <span class="chip">Gymnastics</span><span class="chip">Martial Arts</span>
+    </div>
   </div>
 
   <p class="foot">Coaches &amp; Students · Opening soon</p>
 </main>
+
+<script>
+  const tabs = [...document.querySelectorAll('.tab')];
+  const show = t => tabs.forEach(x => {
+    const on = x === t;
+    x.setAttribute('aria-selected', on);
+    document.getElementById(x.getAttribute('aria-controls')).classList.toggle('on', on);
+  });
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      const next = tabs[(i + d + tabs.length) % tabs.length];
+      next.focus(); show(next);
+    });
+  });
+</script>
 
 </body>
 </html>
