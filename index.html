@@ -4,59 +4,185 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Junnun.in — Coming Soon</title>
+<meta name="description" content="Junnun.in connects coaches with students for affordable sports, music, and arts training — making quality coaching accessible for every child.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b0c10;
-    --fg: #f5f5f7;
-    --accent: #6ee7b7;
+    --bg: #08090d;
+    --fg: #f5f6fa;
+    --muted: #9aa0ae;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --accent-a: #7c5cff;
+    --accent-b: #22d3ee;
+    --accent-c: #f472b6;
   }
+
   @media (prefers-color-scheme: light) {
     :root {
-      --bg: #f5f5f7;
-      --fg: #0b0c10;
-      --accent: #059669;
+      --bg: #f6f7fb;
+      --fg: #10121a;
+      --muted: #565e6d;
+      --card-bg: rgba(255, 255, 255, 0.55);
+      --card-border: rgba(16, 18, 26, 0.08);
+      --accent-a: #6a4cf0;
+      --accent-b: #0891b2;
+      --accent-c: #db2777;
     }
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   html, body {
     height: 100%;
   }
+
   body {
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
     background: var(--bg);
     color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     text-align: center;
     padding: 2rem;
   }
-  .wrap {
-    max-width: 600px;
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    z-index: 0;
+    animation: float 18s ease-in-out infinite;
   }
-  h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
+
+  .blob-1 {
+    width: 38vw;
+    height: 38vw;
+    top: -10%;
+    left: -8%;
+    background: var(--accent-a);
+    animation-delay: 0s;
   }
+
+  .blob-2 {
+    width: 32vw;
+    height: 32vw;
+    bottom: -12%;
+    right: -6%;
+    background: var(--accent-b);
+    animation-delay: -6s;
+  }
+
+  .blob-3 {
+    width: 26vw;
+    height: 26vw;
+    bottom: 10%;
+    left: 8%;
+    background: var(--accent-c);
+    animation-delay: -12s;
+    opacity: 0.35;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(4%, 6%) scale(1.08); }
+    66% { transform: translate(-3%, -4%) scale(0.95); }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    width: 100%;
+    padding: clamp(2rem, 5vw, 3.25rem);
+    border-radius: 28px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+
   .badge {
     display: inline-block;
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--accent);
+    color: var(--fg);
+    background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: 1px solid var(--card-border);
     border-radius: 999px;
-    padding: 0.5rem 1.25rem;
+    padding: 0.5rem 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    background: linear-gradient(120deg, var(--fg) 30%, var(--accent-a) 70%, var(--accent-b) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+
+  .tagline {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-weight: 500;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto 1.75rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--fg);
+    border: 1px solid var(--card-border);
+    background: rgba(127, 127, 127, 0.08);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Junnun.in</h1>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="card">
     <span class="badge">Coming Soon</span>
+    <h1>Junnun.in</h1>
+    <p class="tagline">
+      Connecting coaches with students for quality sports, music, and arts training
+      at minimal cost — so every child gets the chance to learn, regardless of their family's means.
+    </p>
+    <div class="tags">
+      <span class="tag">🏅 Sports</span>
+      <span class="tag">🎵 Music</span>
+      <span class="tag">🎨 Arts</span>
+    </div>
   </div>
 </body>
 </html>
