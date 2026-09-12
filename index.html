@@ -10,26 +10,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #08090d;
-    --fg: #f5f6fa;
-    --muted: #9aa0ae;
+    --bg-1: #03130f;
+    --bg-2: #0a3a2c;
+    --bg-3: #0f5c46;
+    --bg-4: #1a8f63;
+    --lime: #c3f53c;
+    --gold: #f2b705;
+    --fg: #f4faf6;
+    --muted: #9db8ab;
     --card-bg: rgba(255, 255, 255, 0.05);
-    --card-border: rgba(255, 255, 255, 0.12);
-    --accent-a: #7c5cff;
-    --accent-b: #22d3ee;
-    --accent-c: #f472b6;
+    --card-border: rgba(255, 255, 255, 0.14);
   }
 
   @media (prefers-color-scheme: light) {
     :root {
-      --bg: #f6f7fb;
-      --fg: #10121a;
-      --muted: #565e6d;
-      --card-bg: rgba(255, 255, 255, 0.55);
-      --card-border: rgba(16, 18, 26, 0.08);
-      --accent-a: #6a4cf0;
-      --accent-b: #0891b2;
-      --accent-c: #db2777;
+      --bg-1: #eef8f1;
+      --bg-2: #d8f0df;
+      --bg-3: #bfe6cc;
+      --bg-4: #9ed6ae;
+      --lime: #65a30d;
+      --gold: #b45309;
+      --fg: #0b2318;
+      --muted: #4c6357;
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --card-border: rgba(11, 36, 27, 0.1);
     }
   }
 
@@ -46,54 +50,53 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: var(--bg);
+    background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-4));
+    background-size: 400% 400%;
+    animation: gradientFlow 16s ease infinite;
     color: var(--fg);
     font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     text-align: center;
     padding: 2rem;
   }
 
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.55;
+    filter: blur(100px);
+    opacity: 0.4;
     z-index: 0;
-    animation: float 18s ease-in-out infinite;
+    animation: float 20s ease-in-out infinite;
   }
 
   .blob-1 {
-    width: 38vw;
-    height: 38vw;
-    top: -10%;
-    left: -8%;
-    background: var(--accent-a);
+    width: 34vw;
+    height: 34vw;
+    top: -12%;
+    left: -6%;
+    background: var(--lime);
     animation-delay: 0s;
   }
 
   .blob-2 {
-    width: 32vw;
-    height: 32vw;
-    bottom: -12%;
-    right: -6%;
-    background: var(--accent-b);
-    animation-delay: -6s;
-  }
-
-  .blob-3 {
-    width: 26vw;
-    height: 26vw;
-    bottom: 10%;
-    left: 8%;
-    background: var(--accent-c);
-    animation-delay: -12s;
-    opacity: 0.35;
+    width: 30vw;
+    height: 30vw;
+    bottom: -10%;
+    right: -8%;
+    background: var(--gold);
+    opacity: 0.25;
+    animation-delay: -8s;
   }
 
   @keyframes float {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(4%, 6%) scale(1.08); }
-    66% { transform: translate(-3%, -4%) scale(0.95); }
+    33% { transform: translate(5%, 7%) scale(1.1); }
+    66% { transform: translate(-4%, -5%) scale(0.93); }
   }
 
   .card {
@@ -117,7 +120,7 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--fg);
-    background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+    background: linear-gradient(90deg, var(--bg-4), var(--lime));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -132,7 +135,7 @@
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.05;
-    background: linear-gradient(120deg, var(--fg) 30%, var(--accent-a) 70%, var(--accent-b) 100%);
+    background: linear-gradient(120deg, var(--fg) 25%, var(--bg-4) 65%, var(--lime) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -169,7 +172,6 @@
 <body>
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
 
   <div class="card">
     <span class="badge">Coming Soon</span>
